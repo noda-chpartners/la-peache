@@ -1,11 +1,79 @@
 ---
+import { Image } from 'astro:assets';
+
+import Logo from '../assets/logo.png';
+
+const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
-
+  <div class="footer-inner" data-animate="up">
+    <a href="/" class="footer-logo">
+      <Image class="footer-logo-img" src={Logo} alt="La Peache" />
+    </a>
+    <p class="footer-copy">&copy; {year} La Peache nail. All rights reserved.</p>
+  </div>
 </footer>
 
 <style lang="scss">
   @use '../styles/variables' as *;
   @use '../styles/mixins' as *;
+
+  .footer {
+    margin-top: 120px;
+    padding: 48px 4.5%;
+    background: var(--pink-pale);
+  }
+
+  .footer-inner {
+    max-width: var(--container);
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+  }
+
+  .footer-logo-img {
+    width: 180px;
+    height: 40px;
+    margin-right: auto;
+    margin-left: auto;
+    object-fit: contain;
+  }
+
+  .footer-copy {
+    margin-top: 18px;
+    font-family: var(--serif);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--text-light);
+  }
+
+  @include tablet {
+    .footer {
+      margin-top: 88px;
+      padding: 40px 4.5%;
+    }
+
+    .footer-logo-img {
+      width: 150px;
+      height: 36px;
+    }
+  }
+
+  @include sp {
+    .footer {
+      margin-top: 64px;
+      padding: 32px 5%;
+    }
+
+    .footer-logo-img {
+      width: 130px;
+      height: 32px;
+    }
+
+    .footer-copy {
+      margin-top: 14px;
+      font-size: 11px;
+    }
+  }
 </style>

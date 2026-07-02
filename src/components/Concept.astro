@@ -1,0 +1,138 @@
+---
+import { Image } from 'astro:assets';
+
+import Interior from '../assets/hero01.png';
+import Nail from '../assets/item09.jpg';
+import Flower from '../assets/item06.jpg';
+---
+
+<section id="concept" class="section concept">
+  <div class="inner concept-inner">
+    <div class="concept-body" data-animate="right">
+      <p class="section-label">Concept</p>
+      <h2 class="section-title">
+        大人かわいいネイルで<br />
+        心がときめく指先に。
+      </h2>
+      <p class="concept-text">
+        La Peache nail は、シンプルネイルからこだわりのデザインまで、
+        幅広くご対応するプライベートネイルサロンです。<br />
+        おひとりおひとりのライフスタイルや気分に寄り添いながら、
+        指先から日常が少し華やぐような、心ときめく一組をお届けします。<br />
+        自分だけの特別な時間を、どうぞごゆっくりお過ごしください。
+      </p>
+    </div>
+
+    <div class="concept-gallery" data-animate="left" data-animate-delay="120">
+      <div class="concept-gallery-main">
+        <Image src={Interior} alt="La Peache nail のサロン内観" widths={[520, 760]} sizes="(min-width: 1025px) 520px, 100vw" />
+      </div>
+      <div class="concept-gallery-sub">
+        <Image src={Nail} alt="ニュアンスネイルのデザイン" widths={[260, 400]} sizes="(min-width: 1025px) 250px, 50vw" />
+        <Image src={Flower} alt="ミラーネイルのデザイン" widths={[260, 400]} sizes="(min-width: 1025px) 250px, 50vw" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use '../styles/variables' as *;
+  @use '../styles/mixins' as *;
+
+  .concept-inner {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .concept-body {
+    width: 40%;
+    padding-top: 10px;
+  }
+
+  .concept-text {
+    margin-top: 28px;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    line-height: 2.1;
+    color: var(--text-light);
+  }
+
+  .concept-gallery {
+    width: 54%;
+  }
+
+  .concept-gallery-main img {
+    width: 100%;
+    height: 300px;
+    border-radius: 12px;
+    transition: transform 0.45s ease;
+  }
+
+  .concept-gallery-main:hover img {
+    transform: scale(1.03);
+  }
+
+  .concept-gallery-sub {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  .concept-gallery-sub img {
+    width: 48.5%;
+    height: 200px;
+    border-radius: 12px;
+    transition: transform 0.45s ease;
+  }
+
+  .concept-gallery-sub img:hover {
+    transform: scale(1.04);
+  }
+
+  @include tablet {
+    .concept-inner {
+      flex-direction: column;
+    }
+
+    .concept-body {
+      width: 100%;
+    }
+
+    .concept-gallery {
+      width: 100%;
+      margin-top: 32px;
+    }
+
+    .concept-gallery-main img {
+      height: 260px;
+    }
+
+    .concept-gallery-sub img {
+      height: 180px;
+    }
+  }
+
+  @include sp {
+    .concept-text {
+      margin-top: 20px;
+      font-size: 13px;
+      line-height: 2;
+    }
+
+    .concept-gallery {
+      margin-top: 24px;
+    }
+
+    .concept-gallery-main img {
+      height: 220px;
+    }
+
+    .concept-gallery-sub {
+      margin-top: 14px;
+    }
+
+    .concept-gallery-sub img {
+      height: 140px;
+    }
+  }
+</style>

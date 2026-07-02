@@ -1,11 +1,382 @@
 ---
+import { Image } from 'astro:assets';
+
+import Logo from '../assets/logo.png';
+
+const navItems = [
+  { label: 'Concept', href: '#concept' },
+  { label: 'Menu', href: '#menu' },
+  { label: 'Gallery', href: '#gallery' },
+  { label: 'Salon', href: '#salon' },
+  { label: 'Access', href: '#access' },
+];
 ---
 
 <header class="header">
+  <div class="header-inner">
+    <h1 class="header-logo">
+      <a href="/" class="header-logo-link">
+        <Image class="header-logo-img" src={Logo} alt="La Peache" />
+      </a>
+    </h1>
 
+    <button
+      class="header-toggle"
+      type="button"
+      aria-label="メニューを開く"
+      aria-expanded="false"
+      aria-controls="header-nav"
+    >
+      <span class="header-toggle-line"></span>
+      <span class="header-toggle-line"></span>
+    </button>
+  </div>
+
+  <nav id="header-nav" class="header-nav">
+    <ul class="header-nav-list">
+      {
+        navItems.map((item) => (
+          <li class="header-nav-item">
+            <a class="header-nav-link" href={item.href}>{item.label}</a>
+          </li>
+        ))
+      }
+    </ul>
+    <a
+      class="header-reserve"
+      href="https://lapeache.v4.pos-s.net/reserve/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGnlMP7mN7T8hdE5rf-zZoVrREewkmbEgp4Wr1K5FDyoczKLdKr3kiaDjviSmQ_aem_JF5sLKfroqeq87zzOEYXvA"
+      target="_blank"
+    >
+      <span class="header-reserve-main">ご予約はこちら</span>
+      <span class="header-reserve-sub">Reservation</span>
+    </a>
+  </nav>
 </header>
+
+<script>
+  const toggle = document.querySelector('.header-toggle');
+  const nav = document.querySelector('.header-nav');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = nav?.classList.toggle('is-open');
+    toggle.classList.toggle('is-active', Boolean(isOpen));
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  nav?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('is-open');
+      toggle?.classList.remove('is-active');
+      toggle?.setAttribute('aria-expanded', 'false');
+      toggle?.setAttribute('aria-label', 'メニューを開く');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
 
 <style lang="scss">
   @use '../styles/variables' as *;
   @use '../styles/mixins' as *;
+
+  .header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    box-shadow: 0 4px 20px rgba(153, 100, 82, 0.08);
+  }
+
+  .header-inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1280px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 10px 32px;
+  }
+
+  .header-logo-img {
+    width: 200px;
+    height: 70px;
+    object-fit: contain;
+  }
+
+  .header-toggle {
+    position: relative;
+    z-index: 110;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    margin-left: auto;
+    border-radius: 8px;
+  }
+
+  .header-toggle-line {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: 36px;
+    height: 2px;
+    margin-top: -1px;
+    margin-left: -18px;
+    border-radius: 2px;
+    background: var(--text);
+    transform-origin: center center;
+    transition: transform 0.35s ease;
+  }
+
+  .header-toggle-line:first-child {
+    transform: translateY(-5px);
+  }
+
+  .header-toggle-line:last-child {
+    transform: translateY(5px);
+  }
+
+  .header-toggle.is-active .header-toggle-line:first-child {
+    transform: translateY(0) rotate(20deg);
+  }
+
+  .header-toggle.is-active .header-toggle-line:last-child {
+    transform: translateY(0) rotate(-20deg);
+  }
+
+  .header-nav {
+    display: flex;
+    align-items: center;
+  }
+
+  .header-nav-list {
+    display: flex;
+    align-items: center;
+  }
+
+  .header-nav-item {
+    margin-left: 28px;
+  }
+
+  .header-nav-link {
+    font-family: var(--serif);
+    font-size: 16px;
+    letter-spacing: 0.06em;
+    color: var(--text);
+    transition: color 0.25s ease;
+  }
+
+  .header-nav-link:hover {
+    color: var(--pink-deep);
+  }
+
+  .header-reserve {
+    margin-left: 32px;
+    padding: 8px 22px;
+    border-radius: 999px;
+    background: linear-gradient(120deg, var(--pink), var(--pink-deep));
+    color: var(--white);
+    text-align: center;
+    box-shadow: 0 8px 18px rgba(201, 142, 137, 0.3);
+    transition: transform 0.25s ease;
+  }
+
+  .header-reserve:hover {
+    transform: translateY(-2px);
+  }
+
+  .header-reserve-main {
+    display: block;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .header-reserve-sub {
+    display: block;
+    margin-top: 1px;
+    font-family: var(--serif);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    opacity: 0.85;
+  }
+
+  @media (min-width: 1025px) {
+    .header-inner,
+    .header-nav {
+      grid-column: 1;
+      grid-row: 1;
+      width: 100%;
+      max-width: 1280px;
+      margin-right: auto;
+      margin-left: auto;
+      padding-right: 32px;
+      padding-left: 32px;
+    }
+
+    .header {
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: center;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .header-nav {
+      position: static;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      height: auto;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      pointer-events: auto;
+      background: transparent;
+    }
+  }
+
+  @include tablet {
+    .header-inner {
+      position: relative;
+      z-index: 110;
+      padding: 10px 20px;
+    }
+
+    .header-logo-img {
+      width: 150px;
+      height: 52px;
+    }
+
+    .header-toggle {
+      display: flex;
+    }
+
+    .header-nav {
+      position: fixed;
+      inset: 0;
+      z-index: 105;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100dvh;
+      padding: 100px 20px 40px;
+      background: rgba(255, 255, 255, 0.97);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-24px);
+      pointer-events: none;
+      transition:
+        opacity 0.35s ease,
+        transform 0.35s ease,
+        visibility 0.35s ease;
+    }
+
+    .header-nav.is-open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .header-nav-item,
+    .header-reserve {
+      opacity: 0;
+      transform: translateY(-10px);
+      transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    .header-nav.is-open .header-nav-item,
+    .header-nav.is-open .header-reserve {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .header-nav.is-open .header-nav-item:nth-child(1) {
+      transition-delay: 0.06s;
+    }
+
+    .header-nav.is-open .header-nav-item:nth-child(2) {
+      transition-delay: 0.1s;
+    }
+
+    .header-nav.is-open .header-nav-item:nth-child(3) {
+      transition-delay: 0.14s;
+    }
+
+    .header-nav.is-open .header-nav-item:nth-child(4) {
+      transition-delay: 0.18s;
+    }
+
+    .header-nav.is-open .header-nav-item:nth-child(5) {
+      transition-delay: 0.22s;
+    }
+
+    .header-nav.is-open .header-reserve {
+      transition-delay: 0.26s;
+    }
+
+    .header-nav-list {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .header-nav-item {
+      margin-top: 20px;
+      margin-left: 0;
+    }
+
+    .header-nav-item:first-child {
+      margin-top: 0;
+    }
+
+    .header-nav-link {
+      padding: 8px 0;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    .header-reserve {
+      margin-top: 32px;
+      margin-left: 0;
+      padding: 14px 28px;
+    }
+  }
+
+  @include sp {
+    .header-inner {
+      padding: 8px 16px;
+    }
+
+    .header-logo-img {
+      width: 120px;
+      height: 42px;
+    }
+
+    .header-nav {
+      padding: 88px 16px 32px;
+    }
+
+    .header-nav-link {
+      font-size: 18px;
+    }
+  }
 </style>

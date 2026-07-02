@@ -1,0 +1,266 @@
+---
+import { Image } from 'astro:assets';
+
+import item05 from '../assets/item05.jpg';
+import item06 from '../assets/item06.jpg';
+import item03 from '../assets/item03.jpg';
+
+const courses = [
+  {
+    src: item05,
+    name: 'シンプルコース',
+    desc: 'ワンカラー・グラデーションなど',
+    price: '¥6,800',
+  },
+  {
+    src: item06,
+    name: 'トレンドコース',
+    desc: 'トレンドを取り入れたデザイン',
+    price: '¥8,500',
+  },
+  {
+    src: item03,
+    name: 'プレミアムコース',
+    desc: '持ちこみデザイン',
+    price: '¥11,000〜',
+  },
+];
+
+const priceList = [
+  { label: 'ネイルオフ', price: '¥2,200' },
+  { label: 'ハンドケア', price: '¥3,850' },
+  { label: 'ワンカラー', price: '¥6,000' },
+  { label: 'フットトレンド', price: '¥8,500' },
+  { label: 'おまかせ', price: '¥9,500' },
+];
+---
+
+<section id="menu" class="section menu">
+  <div class="inner">
+    <div class="menu-head" data-animate="up">
+      <p class="section-label">Menu / Price</p>
+      <p class="menu-sub">定額のデザインコース</p>
+    </div>
+
+    <div class="menu-body">
+      <ul class="menu-cards">
+        {
+          courses.map((course, index) => (
+            <li class="menu-card" data-animate="up" data-animate-delay={String(index * 100)}>
+              <div class="menu-card-thumb">
+                <Image src={course.src} alt={course.name} widths={[200, 320]} sizes="(min-width: 1025px) 170px, 40vw" />
+              </div>
+              <p class="menu-card-name">{course.name}</p>
+              <p class="menu-card-desc">{course.desc}</p>
+              <p class="menu-card-price">
+                {course.price}<span class="menu-card-unit"></span>
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="menu-price" data-animate="left" data-animate-delay="200">
+        <dl class="menu-price-list">
+          {
+            priceList.map((row) => (
+              <div class="menu-price-row">
+                <dt class="menu-price-label">{row.label}</dt>
+                <dd class="menu-price-value">{row.price}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+
+    <div class="menu-action" data-animate="up" data-animate-delay="300">
+      <a class="button" href="https://lapeache.v4.pos-s.net/reserve/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGnlMP7mN7T8hdE5rf-zZoVrREewkmbEgp4Wr1K5FDyoczKLdKr3kiaDjviSmQ_aem_JF5sLKfroqeq87zzOEYXvA" target="_blank">メニューを見る</a>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use '../styles/variables' as *;
+  @use '../styles/mixins' as *;
+
+  .menu-head {
+    text-align: center;
+  }
+
+  .menu-sub {
+    margin-top: 10px;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    color: var(--text-light);
+  }
+
+  .menu-body {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+  }
+
+  .menu-cards {
+    display: flex;
+    justify-content: space-between;
+    width: 66%;
+  }
+
+  .menu-card {
+    width: 31%;
+    padding: 18px 16px 22px;
+    border-radius: 14px;
+    background: var(--pink-pale);
+    text-align: center;
+  }
+
+  .menu-card-thumb img {
+    width: 100%;
+    height: 120px;
+    border-radius: 10px;
+  }
+
+  .menu-card-name {
+    margin-top: 16px;
+    font-size: 16px;
+    letter-spacing: 0.06em;
+    color: var(--text);
+  }
+
+  .menu-card-desc {
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.7;
+    color: var(--text-light);
+  }
+
+  .menu-card-price {
+    margin-top: 14px;
+    font-family: var(--serif);
+    font-size: 26px;
+    letter-spacing: 0.04em;
+    color: var(--pink-deep);
+  }
+
+  .menu-card-unit {
+    margin-left: 2px;
+    font-size: 14px;
+  }
+
+  .menu-price {
+    width: 30%;
+    padding: 24px 26px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+  }
+
+  .menu-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-top: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed var(--line);
+  }
+
+  .menu-price-row:first-child {
+    margin-top: 0;
+  }
+
+  .menu-price-label {
+    font-weight: normal;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    color: var(--text);
+  }
+
+  .menu-price-value {
+    font-family: var(--serif);
+    font-size: 16px;
+    color: var(--pink-deep);
+  }
+
+  .menu-price-note {
+    margin-top: 16px;
+    font-size: 11px;
+    color: var(--text-light);
+  }
+
+  .menu-action {
+    display: flex;
+    justify-content: center;
+    margin-top: 44px;
+  }
+
+  @include tablet {
+    .menu-body {
+      flex-direction: column;
+      margin-top: 32px;
+    }
+
+    .menu-cards {
+      width: 100%;
+    }
+
+    .menu-card-thumb img {
+      height: 140px;
+    }
+
+    .menu-price {
+      width: 100%;
+      margin-top: 28px;
+      padding: 22px 24px;
+    }
+
+    .menu-action {
+      margin-top: 32px;
+    }
+  }
+
+  @include sp {
+    .menu-sub {
+      font-size: 13px;
+    }
+
+    .menu-body {
+      margin-top: 24px;
+    }
+
+    .menu-cards {
+      flex-direction: column;
+    }
+
+    .menu-card {
+      width: 100%;
+      margin-top: 16px;
+      padding: 16px 14px 20px;
+    }
+
+    .menu-card:first-child {
+      margin-top: 0;
+    }
+
+    .menu-card-thumb img {
+      height: 160px;
+    }
+
+    .menu-card-name {
+      margin-top: 14px;
+      font-size: 15px;
+    }
+
+    .menu-card-price {
+      font-size: 24px;
+    }
+
+    .menu-price {
+      margin-top: 24px;
+      padding: 20px 18px;
+    }
+
+    .menu-action {
+      margin-top: 28px;
+    }
+  }
+</style>

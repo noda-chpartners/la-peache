@@ -1,0 +1,192 @@
+---
+import { Image } from 'astro:assets';
+
+import Interior from '../assets/hero01.png';
+
+const features = [
+  { label: '完全予約制', icon: 'calendar' },
+  { label: '駅近アクセス', icon: 'pin' },
+  { label: 'プライベート空間', icon: 'room' },
+  { label: '女性ネイリスト', icon: 'heart' },
+];
+---
+
+<section id="salon" class="section salon">
+  <div class="inner salon-inner">
+    <div class="salon-image" data-animate="right">
+      <Image src={Interior} alt="La Peache nail の店内" widths={[520, 780]} sizes="(min-width: 1025px) 500px, 100vw" />
+    </div>
+
+    <div class="salon-body" data-animate="left" data-animate-delay="120">
+      <p class="section-label">Salon</p>
+      <h2 class="section-title">完全予約制のプライベートサロン</h2>
+      <p class="salon-text">
+        マンツーマンでの施術にこだわり、まわりを気にせずゆったりとお過ごしいただける
+        プライベートな空間をご用意しました。<br />
+        ていねいなカウンセリングで、あなたの「なりたい」を一緒にかたちにします。
+      </p>
+
+      <ul class="salon-features">
+        {
+          features.map((feature, index) => (
+            <li class="salon-feature" data-animate="scale" data-animate-delay={String(200 + index * 80)}>
+              <span class="salon-feature-icon">
+                {feature.icon === 'calendar' && (
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.4">
+                    <rect x="3" y="4.5" width="18" height="16" rx="2" />
+                    <path d="M3 9h18M8 2.5v4M16 2.5v4" stroke-linecap="round" />
+                  </svg>
+                )}
+                {feature.icon === 'pin' && (
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.4">
+                    <path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.8 7 11 7 11Z" stroke-linejoin="round" />
+                    <circle cx="12" cy="10" r="2.5" />
+                  </svg>
+                )}
+                {feature.icon === 'room' && (
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.4">
+                    <path d="M4 20V7l8-4 8 4v13" stroke-linejoin="round" />
+                    <path d="M9 20v-6h6v6" stroke-linejoin="round" />
+                  </svg>
+                )}
+                {feature.icon === 'heart' && (
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.4">
+                    <path d="M12 20s-7-4.6-7-9.6A3.9 3.9 0 0 1 12 7a3.9 3.9 0 0 1 7 3.4c0 5-7 9.6-7 9.6Z" stroke-linejoin="round" />
+                  </svg>
+                )}
+              </span>
+              <span class="salon-feature-label">{feature.label}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use '../styles/variables' as *;
+  @use '../styles/mixins' as *;
+
+  .salon-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .salon-image {
+    width: 48%;
+  }
+
+  .salon-image img {
+    width: 100%;
+    height: 360px;
+    border-radius: 14px;
+  }
+
+  .salon-body {
+    width: 46%;
+  }
+
+  .salon-text {
+    margin-top: 24px;
+    font-size: 14px;
+    line-height: 2.1;
+    color: var(--text-light);
+  }
+
+  .salon-features {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 36px;
+  }
+
+  .salon-feature {
+    width: 22%;
+    text-align: center;
+  }
+
+  .salon-feature-icon {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    margin-right: auto;
+    margin-left: auto;
+    border-radius: 50%;
+    background: var(--pink-pale);
+    color: var(--pink-deep);
+  }
+
+  .salon-feature-label {
+    display: block;
+    margin-top: 12px;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--text);
+  }
+
+  @include tablet {
+    .salon-inner {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .salon-image {
+      width: 100%;
+    }
+
+    .salon-image img {
+      height: 300px;
+    }
+
+    .salon-body {
+      width: 100%;
+      margin-top: 32px;
+    }
+
+    .salon-features {
+      margin-top: 28px;
+    }
+  }
+
+  @include sp {
+    .salon-image img {
+      height: 240px;
+    }
+
+    .salon-body {
+      margin-top: 24px;
+    }
+
+    .salon-text {
+      margin-top: 18px;
+      font-size: 13px;
+      line-height: 2;
+    }
+
+    .salon-features {
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .salon-feature {
+      width: 48%;
+      margin-top: 20px;
+    }
+
+    .salon-feature:nth-child(-n + 2) {
+      margin-top: 0;
+    }
+
+    .salon-feature-icon {
+      width: 56px;
+      height: 56px;
+    }
+
+    .salon-feature-label {
+      margin-top: 10px;
+      font-size: 11px;
+    }
+  }
+</style>

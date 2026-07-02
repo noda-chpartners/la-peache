@@ -1,0 +1,273 @@
+---
+import { Image, getImage } from 'astro:assets';
+
+import HeroPc from '../assets/pc-hero.png';
+import HeroTab from '../assets/tab-hero.png';
+import HeroSp from '../assets/sp-hero.png';
+
+const pc = await getImage({ src: HeroPc, format: 'webp' });
+const tab = await getImage({ src: HeroTab, format: 'webp' });
+const sp = await getImage({ src: HeroSp, format: 'webp' });
+---
+
+<section class="hero">
+  <div class="hero-inner">
+    <picture class="hero-picture">
+      <source media="(min-width: 1025px)" srcset={pc.src} />
+      <source media="(min-width: 768px)" srcset={tab.src} />
+      <Image
+        src={sp.src}
+        alt="La Peache nail のネイル"
+        width={sp.attributes.width}
+        height={sp.attributes.height}
+        fetchpriority="high"
+        decoding="async"
+      />
+    </picture>
+
+    <div class="hero-copy">
+      <p class="hero-catch" data-animate-load="up" style="--animate-delay: 200ms">
+        指先からときめく、<br />
+        わたしらしい毎日を。
+      </p>
+      <h2 class="hero-title" data-animate-load="up" style="--animate-delay: 400ms">
+        <span class="hero-title-main">La Peache</span>
+        <span class="hero-title-sub">nail</span>
+      </h2>
+      <p class="hero-lead" data-animate-load="up" style="--animate-delay: 600ms">
+        指先から始まる、<br />
+        あなただけのプライベートネイルサロン
+      </p>
+    </div>
+
+    <div class="hero-badge" data-animate-load="scale" style="--animate-delay: 900ms">
+      <p class="hero-badge-text">
+        Private<br />
+        完全予約制の<br />
+        ネイルサロン
+      </p>
+    </div>
+  </div>
+
+  <div class="hero-curve" aria-hidden="true">
+    <svg viewBox="0 0 1440 180" preserveAspectRatio="none">
+      <path
+        class="hero-curve-bg"
+        d="M0,82 C260,150 520,145 790,92 C1080,35 1250,58 1440,22 L1440,180 L0,180 Z"
+      />
+      <path
+        class="hero-curve-line"
+        d="M0,82 C260,150 520,145 790,92 C1080,35 1250,58 1440,22"
+      />
+    </svg>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100dvh;
+  }
+
+  .hero-inner {
+    position: relative;
+    height: 100dvh;
+    z-index: 2;
+  }
+
+  .hero-picture {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .hero-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-copy {
+    position: absolute;
+    top: 50%;
+    left: 8%;
+    z-index: 3;
+    transform: translateY(-50%);
+  }
+
+  .hero-catch {
+    font-size: 18px;
+    letter-spacing: 0.12em;
+    line-height: 2;
+    color: var(--text);
+  }
+
+  .hero-title {
+    margin-top: 18px;
+  }
+
+  .hero-title-main {
+    display: block;
+    font-family: var(--script);
+    font-size: 84px;
+    line-height: 1;
+    color: var(--pink-deep);
+  }
+
+  .hero-title-sub {
+    display: block;
+    margin-top: 6px;
+    margin-left: 90px;
+    font-family: var(--script);
+    font-size: 40px;
+    line-height: 1;
+    color: var(--pink);
+  }
+
+  .hero-lead {
+    margin-top: 26px;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    line-height: 1.9;
+    color: var(--text-light);
+  }
+
+  .hero-badge {
+    position: absolute;
+    top: 52%;
+    left: 46%;
+    z-index: 4;
+    display: grid;
+    place-items: center;
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    background: rgba(214, 151, 149, 0.88);
+    text-align: center;
+    color: var(--white);
+    font-size: 12px;
+    line-height: 1.9;
+    letter-spacing: 0.08em;
+  }
+
+  .hero-curve {
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    z-index: 3;
+    width: 100%;
+    height: 180px;
+    pointer-events: none;
+  }
+
+  .hero-curve svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-curve-bg {
+    fill: #fff;
+  }
+
+  .hero-curve-line {
+    fill: none;
+    stroke: #edcbc8;
+    stroke-width: 8;
+    stroke-linecap: round;
+  }
+
+  @media (max-width: 1024px) {
+    .hero-copy {
+      left: 6%;
+    }
+
+    .hero-catch {
+      font-size: 16px;
+    }
+
+    .hero-title-main {
+      font-size: 64px;
+    }
+
+    .hero-title-sub {
+      margin-left: 60px;
+      font-size: 32px;
+    }
+
+    .hero-lead {
+      margin-top: 20px;
+      font-size: 12px;
+    }
+
+    .hero-badge {
+      top: 54%;
+      left: 50%;
+      width: 112px;
+      height: 112px;
+      font-size: 11px;
+    }
+
+    .hero-curve {
+      height: 140px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hero-inner {
+      height: 100svh;
+      min-height: 560px;
+    }
+
+    .hero-copy {
+      top: auto;
+      left: 6%;
+      bottom: 28%;
+      transform: none;
+    }
+
+    .hero-catch {
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .hero-title {
+      margin-top: 12px;
+    }
+
+    .hero-title-main {
+      font-size: 48px;
+    }
+
+    .hero-title-sub {
+      margin-top: 4px;
+      margin-left: 48px;
+      font-size: 24px;
+    }
+
+    .hero-lead {
+      margin-top: 16px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+    }
+
+    .hero-badge {
+      top: auto;
+      left: auto;
+      right: 8%;
+      bottom: 18%;
+      width: 96px;
+      height: 96px;
+      font-size: 10px;
+      line-height: 1.7;
+    }
+
+    .hero-curve {
+      height: 100px;
+    }
+
+    .hero-curve-line {
+      stroke-width: 5;
+    }
+  }
+</style>

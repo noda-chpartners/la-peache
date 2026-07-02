@@ -1,0 +1,114 @@
+---
+import { Image } from 'astro:assets';
+
+import item01 from '../assets/item01.jpg';
+import item07 from '../assets/item07.jpg';
+import item08 from '../assets/item08.jpg';
+import item09 from '../assets/item09.jpg';
+import item02 from '../assets/item02.jpg';
+import item06 from '../assets/item06.jpg';
+
+const posts = [
+  { src: item09, alt: 'ミラーフラワーネイル' },
+  { src: item07, alt: 'ブラウンのミラーネイル' },
+  { src: item06, alt: 'グリーンのニュアンスネイル' },
+  { src: item01, alt: 'カラフルな天然石風ネイル' },
+  { src: item08, alt: 'パープルのフットネイル' },
+  { src: item02, alt: 'オータムデザインネイル' },
+];
+---
+
+<section id="instagram" class="section instagram">
+  <div class="inner">
+    <div class="instagram-head" data-animate="up">
+      <p class="section-label">Instagram</p>
+      <a class="instagram-account" href="#">@lapeache_nail</a>
+    </div>
+  </div>
+
+  <ul class="instagram-list">
+    {
+      posts.map((post, index) => (
+        <li class="instagram-item" data-animate="scale" data-animate-delay={String(index * 70)}>
+          <a class="instagram-link" href="https://www.instagram.com/la_peache_nail?igsh=MXJ4bmY4dXRpYW9hag%3D%3D&utm_source=qr" target="_blank">
+            <Image src={post.src} alt={post.alt} widths={[240, 400]} sizes="(min-width: 1025px) 16vw, 33vw" />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style lang="scss">
+  @use '../styles/variables' as *;
+  @use '../styles/mixins' as *;
+
+  .instagram-head {
+    text-align: center;
+  }
+
+  .instagram-account {
+    margin-top: 10px;
+    font-family: var(--serif);
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    color: var(--text-light);
+  }
+
+  .instagram-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 32px;
+  }
+
+  .instagram-item {
+    width: calc(100% / 6);
+  }
+
+  .instagram-link {
+    display: block;
+    overflow: hidden;
+  }
+
+  .instagram-link img {
+    width: 100%;
+    height: 220px;
+    transition: transform 0.4s ease;
+  }
+
+  .instagram-link:hover img {
+    transform: scale(1.06);
+  }
+
+  @include tablet {
+    .instagram-list {
+      margin-top: 24px;
+    }
+
+    .instagram-item {
+      width: calc(100% / 3);
+    }
+
+    .instagram-link img {
+      height: 180px;
+    }
+  }
+
+  @include sp {
+    .instagram-account {
+      font-size: 14px;
+    }
+
+    .instagram-list {
+      margin-top: 20px;
+    }
+
+    .instagram-item {
+      width: 50%;
+    }
+
+    .instagram-link img {
+      height: 160px;
+    }
+  }
+</style>

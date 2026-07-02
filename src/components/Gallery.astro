@@ -1,0 +1,164 @@
+---
+import { Image } from 'astro:assets';
+
+import item01 from '../assets/item01.jpg';
+import item02 from '../assets/item02.jpg';
+import item04 from '../assets/item04.jpg';
+import item05 from '../assets/item05.jpg';
+import item07 from '../assets/item07.jpg';
+
+const gallery = [
+  { src: item01, alt: 'シアーカラーの夏ネイル' },
+  { src: item02, alt: 'オータムデザインネイル' },
+  { src: item05, alt: 'ブルーの天然石風ネイル' },
+  { src: item07, alt: 'ブラウンのミラーネイル' },
+  { src: item04, alt: 'ハートモチーフのデザインネイル' },
+];
+---
+
+<section id="gallery" class="section gallery">
+  <div class="inner">
+    <div class="gallery-head" data-animate="up">
+      <p class="section-label">Gallery</p>
+      <p class="gallery-sub">シンプルからこだわりデザインまで幅広く</p>
+    </div>
+
+    <ul class="gallery-list">
+      {
+        gallery.map((item, index) => (
+          <li class="gallery-item" data-animate="up" data-animate-delay={String(index * 80)}>
+            <Image src={item.src} alt={item.alt} widths={[220, 380]} sizes="(min-width: 1025px) 190px, 45vw" />
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="gallery-action" data-animate="up" data-animate-delay="400">
+      <a class="button" href="https://www.instagram.com/la_peache_nail?igsh=MXJ4bmY4dXRpYW9hag%3D%3D&utm_source=qr" target="_blank">もっと見る</a>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use '../styles/variables' as *;
+  @use '../styles/mixins' as *;
+
+  .gallery-head {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .gallery-sub {
+    margin-left: 20px;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    color: var(--text-light);
+  }
+
+  .gallery-list {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 32px;
+  }
+
+  .gallery-item {
+    width: 19%;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    transition: transform 0.45s ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.05);
+  }
+
+  .gallery-action {
+    display: flex;
+    justify-content: center;
+    margin-top: 44px;
+  }
+
+  @include tablet {
+    .gallery-head {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .gallery-sub {
+      margin-top: 10px;
+      margin-left: 0;
+    }
+
+    .gallery-list {
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      margin-top: 24px;
+    }
+
+    .gallery-item {
+      width: 31.5%;
+      margin-top: 16px;
+      margin-left: 2.75%;
+    }
+
+    .gallery-item:nth-child(-n + 3) {
+      margin-top: 0;
+    }
+
+    .gallery-item:nth-child(3n + 1) {
+      margin-left: 0;
+    }
+
+    .gallery-item img {
+      height: 180px;
+    }
+
+    .gallery-action {
+      margin-top: 32px;
+    }
+  }
+
+  @include sp {
+    .gallery-sub {
+      font-size: 13px;
+    }
+
+    .gallery-list {
+      margin-top: 20px;
+    }
+
+    .gallery-item {
+      width: 48%;
+      margin-top: 14px;
+      margin-left: 4%;
+    }
+
+    .gallery-item:nth-child(-n + 3) {
+      margin-top: 14px;
+    }
+
+    .gallery-item:nth-child(-n + 2) {
+      margin-top: 0;
+    }
+
+    .gallery-item:nth-child(3n + 1) {
+      margin-left: 4%;
+    }
+
+    .gallery-item:nth-child(2n + 1) {
+      margin-left: 0;
+    }
+
+    .gallery-item img {
+      height: 160px;
+    }
+
+    .gallery-action {
+      margin-top: 28px;
+    }
+  }
+</style>

@@ -10,12 +10,40 @@ import Footer from '../components/Footer.astro';
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
-		<title>La-Peache</title>
+		<meta
+			name="description"
+			content="La Peache nail は、指先からときめく毎日を届ける完全予約制のプライベートネイルサロンです。シンプルからこだわりデザインまで幅広く対応します。"
+		/>
+		<meta property="og:title" content="La Peache nail" />
+		<meta
+			property="og:description"
+			content="指先からときめく、わたしらしい毎日を。完全予約制のプライベートネイルサロン La Peache nail。"
+		/>
+		<meta property="og:type" content="website" />
+		<meta property="og:image" content="/ogp.png" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Parisienne&family=Zen+Kurenaido&display=swap&Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap"
+			rel="stylesheet"
+		/>
+		<title>La Peache nail｜完全予約制プライベートネイルサロン</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<Header />
+		<main class="main">
+			<slot />
+		</main>
+		<Footer />
+		<script>
+			import '../scripts/scroll-animate.ts';
+		</script>
 	</body>
 </html>
+
+<style lang="scss">
+	@use '../styles/variables' as *;
+	@use '../styles/mixins' as *;
+</style>

@@ -1,0 +1,135 @@
+@use 'animations';
+
+@font-face {
+  font-family: "HaruTegaki";
+  src: url("/HaruTegakiFont12.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --text: #996452;
+  --text-light: #b08a78;
+  --pink: #dca7a3;
+  --pink-deep: #c98e89;
+  --pink-pale: #fdf4f2;
+  --pink-soft: #f7e2df;
+  --pink-block: #f1cfcb;
+  --line: #edcbc8;
+  --white: #fff;
+  --container: 1040px;
+  --script: "Parisienne", cursive;
+  --serif: "Cormorant Garamond", serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body {
+  background-color: var(--white);
+  font-family: "HaruTegaki", "Zen Kurenaido" sans-serif;
+  color: #996452;
+  overflow-x: clip;
+}
+
+a {
+  display: block;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.section {
+  padding: 0 4.5%;
+  margin-top: 120px;
+}
+
+.inner {
+  width: 100%;
+  max-width: var(--container);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.section-label {
+  font-family: var(--script);
+  font-size: 40px;
+  line-height: 1;
+  color: var(--pink);
+}
+
+.section-title {
+  margin-top: 14px;
+  font-size: 28px;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+
+.button {
+  width: 240px;
+  padding: 14px 0;
+  border-radius: 999px;
+  background: linear-gradient(120deg, var(--pink), var(--pink-deep));
+  color: var(--white);
+  text-align: center;
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  box-shadow: 0 10px 22px rgba(201, 142, 137, 0.28);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 26px rgba(201, 142, 137, 0.36);
+}
+
+@media (max-width: 1024px) {
+  .section {
+    margin-top: 88px;
+  }
+
+  .section-label {
+    font-size: 34px;
+  }
+
+  .section-title {
+    font-size: 24px;
+  }
+
+  .button {
+    width: 220px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 767px) {
+  .section {
+    padding: 0 5%;
+    margin-top: 64px;
+  }
+
+  .section-label {
+    font-size: 28px;
+  }
+
+  .section-title {
+    margin-top: 10px;
+    font-size: 20px;
+    line-height: 1.7;
+  }
+
+  .button {
+    width: 100%;
+    max-width: 280px;
+    padding: 13px 0;
+    font-size: 14px;
+  }
+}

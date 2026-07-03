@@ -25,13 +25,6 @@ const courses = [
     price: '¥10,500〜',
   },
 ];
-
-const priceList = [
-  { label: 'ネイルオフ', price: '¥2,200' },
-  { label: 'ハンドケア', price: '¥3,850' },
-  { label: 'フットトレンド', price: '¥8,500' },
-  { label: 'おまかせ', price: '¥9,500' },
-];
 ---
 
 <section id="menu" class="section menu">
@@ -47,7 +40,7 @@ const priceList = [
           courses.map((course, index) => (
             <li class="menu-card" data-animate="up" data-animate-delay={String(index * 100)}>
               <div class="menu-card-thumb">
-                <Image src={course.src} alt={course.name} widths={[200, 320]} sizes="(min-width: 1025px) 170px, 40vw" />
+                <Image src={course.src} alt={course.name} widths={[200, 320]} sizes="(min-width: 1025px) 320px, 90vw" />
               </div>
               <p class="menu-card-name">{course.name}</p>
               <p class="menu-card-desc">{course.desc}</p>
@@ -59,18 +52,9 @@ const priceList = [
         }
       </ul>
 
-      <div class="menu-price" data-animate="left" data-animate-delay="200">
-        <dl class="menu-price-list">
-          {
-            priceList.map((row) => (
-              <div class="menu-price-row">
-                <dt class="menu-price-label">{row.label}</dt>
-                <dd class="menu-price-value">{row.price}</dd>
-              </div>
-            ))
-          }
-        </dl>
-      </div>
+      <p class="menu-note" data-animate="up" data-animate-delay="200">
+        ※プレミアムで持ち込みコースの大パーツ等は別料金になります。
+      </p>
     </div>
 
     <div class="menu-action" data-animate="up" data-animate-delay="300">
@@ -95,19 +79,18 @@ const priceList = [
   }
 
   .menu-body {
-    display: flex;
-    justify-content: space-between;
     margin-top: 40px;
   }
 
   .menu-cards {
     display: flex;
     justify-content: space-between;
-    width: 66%;
+    gap: 24px;
+    width: 100%;
   }
 
   .menu-card {
-    width: 31%;
+    flex: 1;
     padding: 18px 16px 22px;
     border-radius: 14px;
     background: var(--pink-pale);
@@ -116,8 +99,9 @@ const priceList = [
 
   .menu-card-thumb img {
     width: 100%;
-    height: 120px;
+    height: 170px;
     border-radius: 10px;
+    object-fit: cover;
   }
 
   .menu-card-name {
@@ -147,42 +131,11 @@ const priceList = [
     font-size: 14px;
   }
 
-  .menu-price {
-    width: 30%;
-    padding: 24px 26px;
-    border: 1px solid var(--line);
-    border-radius: 14px;
-  }
-
-  .menu-price-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-top: 14px;
-    padding-bottom: 12px;
-    border-bottom: 1px dashed var(--line);
-  }
-
-  .menu-price-row:first-child {
-    margin-top: 0;
-  }
-
-  .menu-price-label {
-    font-weight: normal;
-    font-size: 14px;
+  .menu-note {
+    margin-top: 22px;
+    text-align: center;
+    font-size: 12px;
     letter-spacing: 0.04em;
-    color: var(--text);
-  }
-
-  .menu-price-value {
-    font-family: var(--serif);
-    font-size: 16px;
-    color: var(--pink-deep);
-  }
-
-  .menu-price-note {
-    margin-top: 16px;
-    font-size: 11px;
     color: var(--text-light);
   }
 
@@ -194,22 +147,15 @@ const priceList = [
 
   @include tablet {
     .menu-body {
-      flex-direction: column;
       margin-top: 32px;
     }
 
     .menu-cards {
-      width: 100%;
+      gap: 16px;
     }
 
     .menu-card-thumb img {
       height: 140px;
-    }
-
-    .menu-price {
-      width: 100%;
-      margin-top: 28px;
-      padding: 22px 24px;
     }
 
     .menu-action {
@@ -251,11 +197,6 @@ const priceList = [
 
     .menu-card-price {
       font-size: 24px;
-    }
-
-    .menu-price {
-      margin-top: 24px;
-      padding: 20px 18px;
     }
 
     .menu-action {

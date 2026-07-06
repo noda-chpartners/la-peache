@@ -1,28 +1,47 @@
 ---
 import { Image } from 'astro:assets';
 
-import item05 from '../assets/item011.jpg';
-import item06 from '../assets/item012.jpg';
-import item03 from '../assets/item03.jpg';
+import handSimple from '../assets/item011.jpg';
+import handTrend from '../assets/item012.jpg';
+import handOmakase from '../assets/item013.png';
+import footSimple from '../assets/item014.png';
+import footDesign from '../assets/item015.png';
 
-const courses = [
+const menuGroups = [
   {
-    src: item05,
-    name: 'シンプルコース',
-    desc: 'ワンカラー・グラデーションなど',
-    price: '¥6,800',
+    category: 'Hand',
+    courses: [
+      {
+        src: handSimple,
+        name: 'Simple',
+        price: '¥6,800',
+      },
+      {
+        src: handTrend,
+        name: 'Trend',
+        price: '¥8,500',
+      },
+      {
+        src: handOmakase,
+        name: 'おまかせ',
+        price: '¥9,500',
+      },
+    ],
   },
   {
-    src: item06,
-    name: 'トレンドコース',
-    desc: 'トレンドを取り入れたデザイン',
-    price: '¥8,500',
-  },
-  {
-    src: item03,
-    name: 'プレミアムコース',
-    desc: '持ちこみデザイン',
-    price: '¥10,500〜',
+    category: 'Foot',
+    courses: [
+      {
+        src: footSimple,
+        name: 'Simple',
+        price: '¥7,500',
+      },
+      {
+        src: footDesign,
+        name: 'Design',
+        price: '¥9,500',
+      },
+    ],
   },
 ];
 ---
@@ -35,26 +54,26 @@ const courses = [
     </div>
 
     <div class="menu-body">
-      <ul class="menu-cards">
-        {
-          courses.map((course, index) => (
-            <li class="menu-card" data-animate="up" data-animate-delay={String(index * 100)}>
-              <div class="menu-card-thumb">
-                <Image src={course.src} alt={course.name} widths={[200, 320]} sizes="(min-width: 1025px) 320px, 90vw" />
-              </div>
-              <p class="menu-card-name">{course.name}</p>
-              <p class="menu-card-desc">{course.desc}</p>
-              <p class="menu-card-price">
-                {course.price}<span class="menu-card-unit"></span>
-              </p>
-            </li>
-          ))
-        }
-      </ul>
-
-      <p class="menu-note" data-animate="up" data-animate-delay="200">
-        ※プレミアムで持ち込みコースの大パーツ等は別料金になります。
-      </p>
+      {
+        menuGroups.map((group, gi) => (
+          <div class="menu-group" data-animate="up" data-animate-delay={String(gi * 100)}>
+            <p class="menu-group-title">{group.category}</p>
+            <ul class="menu-cards">
+              {group.courses.map((course, index) => (
+                <li class="menu-card" data-animate="up" data-animate-delay={String(gi * 100 + index * 100)}>
+                  <div class="menu-card-thumb">
+                    <Image src={course.src} alt={`${group.category} ${course.name}`} widths={[200, 320]} sizes="(min-width: 1025px) 320px, 90vw" />
+                  </div>
+                  <p class="menu-card-name">{course.name}</p>
+                  <p class="menu-card-price">
+                    {course.price}<span class="menu-card-unit"></span>
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
     </div>
 
     <div class="menu-action" data-animate="up" data-animate-delay="300">
@@ -82,11 +101,28 @@ const courses = [
     margin-top: 40px;
   }
 
+  .menu-group {
+    margin-top: 40px;
+  }
+
+  .menu-group:first-child {
+    margin-top: 0;
+  }
+
+  .menu-group-title {
+    font-family: var(--serif);
+    font-size: 20px;
+    letter-spacing: 0.1em;
+    text-align: center;
+    color: var(--pink-deep);
+  }
+
   .menu-cards {
     display: flex;
     justify-content: space-between;
     gap: 24px;
     width: 100%;
+    margin-top: 20px;
   }
 
   .menu-card {
@@ -111,13 +147,6 @@ const courses = [
     color: var(--text);
   }
 
-  .menu-card-desc {
-    margin-top: 8px;
-    font-size: 12px;
-    line-height: 1.7;
-    color: var(--text-light);
-  }
-
   .menu-card-price {
     margin-top: 14px;
     font-family: var(--serif);
@@ -131,14 +160,6 @@ const courses = [
     font-size: 14px;
   }
 
-  .menu-note {
-    margin-top: 22px;
-    text-align: center;
-    font-size: 12px;
-    letter-spacing: 0.04em;
-    color: var(--text-light);
-  }
-
   .menu-action {
     display: flex;
     justify-content: center;
@@ -147,6 +168,10 @@ const courses = [
 
   @include tablet {
     .menu-body {
+      margin-top: 32px;
+    }
+
+    .menu-group {
       margin-top: 32px;
     }
 
@@ -170,6 +195,14 @@ const courses = [
 
     .menu-body {
       margin-top: 24px;
+    }
+
+    .menu-group {
+      margin-top: 28px;
+    }
+
+    .menu-group-title {
+      font-size: 18px;
     }
 
     .menu-cards {

@@ -8,6 +8,7 @@ const navItems = [
   { label: 'Menu', href: '#menu' },
   { label: 'Gallery', href: '#gallery' },
   { label: 'Salon', href: '#salon' },
+  { label: 'Profile', href: '#profile' },
   { label: 'Access', href: '#access' },
 ];
 ---
@@ -326,13 +327,17 @@ const navItems = [
       transition-delay: 0.18s;
     }
 
-    .header-nav.is-open .header-nav-item:nth-child(5) {
-      transition-delay: 0.22s;
-    }
+  .header-nav.is-open .header-nav-item:nth-child(5) {
+    transition-delay: 0.22s;
+  }
 
-    .header-nav.is-open .header-reserve {
-      transition-delay: 0.26s;
-    }
+  .header-nav.is-open .header-nav-item:nth-child(6) {
+    transition-delay: 0.26s;
+  }
+
+  .header-nav.is-open .header-reserve {
+    transition-delay: 0.3s;
+  }
 
     .header-nav-list {
       flex-direction: column;

@@ -1,0 +1,172 @@
+---
+const qualifications = [
+  'JNECネイリスト技能検定1級',
+  'ジェルネイル技能検定上級',
+  'ネイルサロン衛生管理士',
+];
+---
+
+<section id="profile" class="section profile">
+  <div class="inner profile-inner">
+    <div class="profile-image" data-animate="right">
+      <!-- TODO: 写真は仮です。ネイリストのプロフィール写真に差し替えてください。 -->
+      <div class="profile-image-placeholder">
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.2">
+          <circle cx="12" cy="8" r="4" />
+          <path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7" stroke-linecap="round" />
+        </svg>
+        <p class="profile-image-placeholder-text">Photo<br />（写真準備中）</p>
+      </div>
+    </div>
+
+    <div class="profile-body" data-animate="left" data-animate-delay="120">
+      <p class="section-label">Nailist Profile</p>
+      <h2 class="section-title">ネイリストプロフィール</h2>
+
+      <p class="profile-text">
+        ネイリスト歴8年。都内サロン勤務を経て、富山市にプライベートネイルサロン「La
+        Peache（ラ・ピーシェ）」をオープン。<br />
+        お客様一人ひとりのお爪の状態やライフスタイルに合わせた施術を心掛けております。
+      </p>
+
+      <div class="profile-qualifications" data-animate="up" data-animate-delay="200">
+        <p class="profile-qualifications-title">保有資格</p>
+        <ul class="profile-qualifications-list">
+          {qualifications.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+
+      <p class="profile-text">大人可愛いデザインや、オフィスでも楽しめる上品なネイルが得意です。</p>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @use '../styles/variables' as *;
+  @use '../styles/mixins' as *;
+
+  .profile-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .profile-image {
+    width: 42%;
+  }
+
+  .profile-image-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    width: 100%;
+    height: 380px;
+    border: 1px dashed var(--pink);
+    border-radius: 14px;
+    background: var(--pink-pale);
+    color: var(--pink-deep);
+  }
+
+  .profile-image-placeholder-text {
+    font-size: 12px;
+    line-height: 1.8;
+    letter-spacing: 0.06em;
+    text-align: center;
+  }
+
+  .profile-body {
+    width: 52%;
+  }
+
+  .profile-text {
+    margin-top: 24px;
+    font-size: 14px;
+    line-height: 2.1;
+    color: var(--text-light);
+  }
+
+  .profile-qualifications {
+    margin-top: 28px;
+    padding: 22px 24px;
+    border-radius: 14px;
+    background: var(--pink-pale);
+  }
+
+  .profile-qualifications-title {
+    font-family: var(--serif);
+    font-size: 15px;
+    letter-spacing: 0.06em;
+    color: var(--pink-deep);
+  }
+
+  .profile-qualifications-list {
+    margin-top: 12px;
+  }
+
+  .profile-qualifications-list li {
+    position: relative;
+    margin-top: 8px;
+    padding-left: 16px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+
+  .profile-qualifications-list li:first-child {
+    margin-top: 0;
+  }
+
+  .profile-qualifications-list li::before {
+    content: '';
+    position: absolute;
+    top: 9px;
+    left: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--pink-deep);
+  }
+
+  @include tablet {
+    .profile-inner {
+      flex-direction: column-reverse;
+      align-items: stretch;
+    }
+
+    .profile-image {
+      width: 100%;
+      margin-top: 32px;
+    }
+
+    .profile-image-placeholder {
+      height: 300px;
+    }
+
+    .profile-body {
+      width: 100%;
+    }
+  }
+
+  @include sp {
+    .profile-image {
+      margin-top: 24px;
+    }
+
+    .profile-image-placeholder {
+      height: 240px;
+    }
+
+    .profile-text {
+      margin-top: 18px;
+      font-size: 13px;
+      line-height: 2;
+    }
+
+    .profile-qualifications {
+      margin-top: 22px;
+      padding: 18px 18px;
+    }
+  }
+</style>

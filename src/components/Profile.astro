@@ -1,22 +1,15 @@
 ---
-const qualifications = [
-  'JNECネイリスト技能検定1級',
-  'ジェルネイル技能検定上級',
-  'ネイルサロン衛生管理士',
-];
+import { Image } from 'astro:assets';
+
+import Profile from '../assets/profile.png';
+
+const qualifications = ['JNECネイリスト技能検定1級', 'ジェルネイル技能検定上級', 'ネイルサロン衛生管理士'];
 ---
 
 <section id="profile" class="section profile">
   <div class="inner profile-inner">
     <div class="profile-image" data-animate="right">
-      <!-- TODO: 写真は仮です。ネイリストのプロフィール写真に差し替えてください。 -->
-      <div class="profile-image-placeholder">
-        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.2">
-          <circle cx="12" cy="8" r="4" />
-          <path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7" stroke-linecap="round" />
-        </svg>
-        <p class="profile-image-placeholder-text">Photo<br />（写真準備中）</p>
-      </div>
+      <Image src={Profile} alt="ネイリストプロフィール写真" widths={[420, 640]} sizes="(min-width: 1025px) 420px, 100vw" />
     </div>
 
     <div class="profile-body" data-animate="left" data-animate-delay="120">
@@ -24,8 +17,7 @@ const qualifications = [
       <h2 class="section-title">ネイリストプロフィール</h2>
 
       <p class="profile-text">
-        ネイリスト歴8年。都内サロン勤務を経て、富山市にプライベートネイルサロン「La
-        Peache（ラ・ピーシェ）」をオープン。<br />
+        ネイリスト歴8年。都内サロン勤務を経て、富山市にプライベートネイルサロン「La Peache（ラ・ピーシェ）」をオープン。<br />
         お客様一人ひとりのお爪の状態やライフスタイルに合わせた施術を心掛けております。
       </p>
 
@@ -55,29 +47,16 @@ const qualifications = [
     width: 42%;
   }
 
-  .profile-image-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    width: 100%;
-    height: 380px;
-    border: 1px dashed var(--pink);
-    border-radius: 14px;
-    background: var(--pink-pale);
-    color: var(--pink-deep);
-  }
-
-  .profile-image-placeholder-text {
-    font-size: 12px;
-    line-height: 1.8;
-    letter-spacing: 0.06em;
-    text-align: center;
-  }
-
   .profile-body {
     width: 52%;
+  }
+
+  .profile-image img {
+    width: 100%;
+    height: 380px;
+    border-radius: 14px;
+    object-fit: cover;
+    object-position: center 20%;
   }
 
   .profile-text {
@@ -140,8 +119,8 @@ const qualifications = [
       margin-top: 32px;
     }
 
-    .profile-image-placeholder {
-      height: 300px;
+    .profile-image img {
+      height: 420px;
     }
 
     .profile-body {
@@ -154,8 +133,8 @@ const qualifications = [
       margin-top: 24px;
     }
 
-    .profile-image-placeholder {
-      height: 240px;
+    .profile-image img {
+      height: 320px;
     }
 
     .profile-text {

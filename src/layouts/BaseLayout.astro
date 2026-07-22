@@ -4,32 +4,102 @@ import '../styles/global.scss';
 
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+
+interface Props {
+	title?: string;
+	description?: string;
+	ogImage?: string;
+	noindex?: boolean;
+}
+
+const defaultTitle = 'La Peache nail｜完全予約制プライベートネイルサロン';
+const defaultDescription =
+	'La Peache nail は、指先からときめく毎日を届ける完全予約制のプライベートネイルサロンです。シンプルからこだわりデザインまで幅広く対応します。';
+const defaultOgDescription =
+	'指先からときめく、わたしらしい毎日を。完全予約制のプライベートネイルサロン La Peache nail。';
+
+const {
+	title = defaultTitle,
+	description = defaultDescription,
+	ogImage = '/ogp.png',
+	noindex = false,
+} = Astro.props;
+
+const site = Astro.site ?? Astro.url;
+const canonicalURL = new URL(Astro.url.pathname, site);
+const ogImageURL = new URL(ogImage, site);
+const pageURL = canonicalURL.href;
+
+const ogTitle = title === defaultTitle ? 'La Peache nail' : title;
+const ogDescription =
+	description === defaultDescription ? defaultOgDescription : description;
+
+const structuredData = {
+	'@context': 'https://schema.org',
+	'@type': 'NailSalon',
+	name: 'La Peache nail',
+	alternateName: 'ラ・ピーシェ',
+	description,
+	url: pageURL,
+	image: ogImageURL.href,
+	address: {
+		'@type': 'PostalAddress',
+		streetAddress: '田中町',
+		addressLocality: '富山市',
+		addressRegion: '富山県',
+		addressCountry: 'JP',
+	},
+	sameAs: ['https://www.instagram.com/la_peache_nail/'],
+};
 ---
 
 <html lang="ja">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="keywords" content="ネイルサロン,富山,ネイル,プライベートサロン,完全予約制,La Peache,ラ・ピーシェ" />
+		<meta name="author" content="La Peache nail" />
+		<meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="theme-color" content="#dca7a3" />
 		<meta name="generator" content={Astro.generator} />
-		<meta
-			name="description"
-			content="La Peache nail は、指先からときめく毎日を届ける完全予約制のプライベートネイルサロンです。シンプルからこだわりデザインまで幅広く対応します。"
-		/>
-		<meta property="og:title" content="La Peache nail" />
-		<meta
-			property="og:description"
-			content="指先からときめく、わたしらしい毎日を。完全予約制のプライベートネイルサロン La Peache nail。"
-		/>
+
+		<link rel="canonical" href={pageURL} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="apple-touch-icon" href="/favicon.svg" />
+
+		{/* Open Graph */}
 		<meta property="og:type" content="website" />
-		<meta property="og:image" content="/ogp.png" />
+		<meta property="og:locale" content="ja_JP" />
+		<meta property="og:site_name" content="La Peache nail" />
+		<meta property="og:title" content={ogTitle} />
+		<meta property="og:description" content={ogDescription} />
+		<meta property="og:url" content={pageURL} />
+		<meta property="og:image" content={ogImageURL.href} />
+		<meta property="og:image:secure_url" content={ogImageURL.href} />
+		<meta property="og:image:type" content="image/png" />
+		<meta property="og:image:width" content="1089" />
+		<meta property="og:image:height" content="608" />
+		<meta property="og:image:alt" content="La Peache nail" />
+
+		{/* Twitter / X */}
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={ogTitle} />
+		<meta name="twitter:description" content={ogDescription} />
+		<meta name="twitter:image" content={ogImageURL.href} />
+		<meta name="twitter:image:alt" content="La Peache nail" />
+
+		<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Parisienne&family=Zen+Kurenaido&display=swap&Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Parisienne&family=Zen+Kurenaido&display=swap"
 			rel="stylesheet"
 		/>
-		<title>La Peache nail｜完全予約制プライベートネイルサロン</title>
+		<meta name="google-site-verification" content="W6X3cwCqNwAUejsnK3WonJ1538dIruj4tj0PKa2gu5U" />
 	</head>
 	<body>
 		<Header />
